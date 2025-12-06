@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "compile": "hardhat compile",
-    "deploy:local": "hardhat run scripts/deploy.ts --network local",
+    "deploy:local": "hardhat run contracts/scripts/deploy.ts --network local",
+    "deploy:sepolia": "hardhat run contracts/scripts/deploy.ts --network sepolia",
     "test": "hardhat test"
   },
   "devDependencies": {

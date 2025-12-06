@@ -37,6 +37,16 @@ The smart contract checks the following (all on encrypted data):
 - MetaMask browser extension
 - Hardhat for smart contract development
 
+### 🌐 Deployment Options
+
+This project supports multiple deployment targets:
+
+1. **Sepolia Testnet** (Recommended for production) - Ethereum testnet with real blockchain
+2. **Local FHEVM** - For development with full FHE capabilities
+3. **Custom FHEVM Network** - For production FHE deployment
+
+**For Vercel/Production**: See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) and [VERCEL_SETUP.md](./VERCEL_SETUP.md)
+
 ### 1. Install Dependencies
 
 ```bash
@@ -94,6 +104,41 @@ npm run dev
 ```
 
 Visit `http://localhost:3000` in your browser.
+
+## 🌐 Deploy to Sepolia Testnet (Production)
+
+### Quick Sepolia Setup
+
+1. **Get Sepolia ETH**: Visit [sepoliafaucet.com](https://sepoliafaucet.com/)
+
+2. **Configure Environment** (root `.env`):
+```env
+SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/YOUR_KEY
+PRIVATE_KEY=your_wallet_private_key
+```
+
+3. **Deploy Contract**:
+```bash
+npx hardhat run scripts/deploy.ts --network sepolia
+```
+
+4. **Configure Frontend** (`contracts/scripts/frontend/.env.local`):
+```env
+NEXT_PUBLIC_NETWORK=sepolia
+NEXT_PUBLIC_CONTRACT_ADDRESS=0xYourDeployedAddress
+```
+
+5. **Deploy to Vercel**:
+```bash
+cd contracts/scripts/frontend
+vercel --prod
+```
+
+6. **Add Environment Variables on Vercel**:
+   - `NEXT_PUBLIC_NETWORK=sepolia`
+   - `NEXT_PUBLIC_CONTRACT_ADDRESS=0xYour...Address`
+
+**Full guide**: See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
 
 ## 📁 Project Structure
 

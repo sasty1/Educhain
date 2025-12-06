@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserProvider } from "ethers";
+import { Brain } from "lucide-react";
 
 export default function Header() {
   const [account, setAccount] = useState<string | null>(null);
@@ -56,9 +57,9 @@ export default function Header() {
       left: 0,
       right: 0,
       zIndex: 1000,
-      background: "rgba(10, 10, 30, 0.95)",
+      background: "rgba(0, 0, 0, 0.95)",
       backdropFilter: "blur(10px)",
-      borderBottom: "1px solid rgba(79, 209, 197, 0.2)",
+      borderBottom: "1px solid rgba(16, 185, 129, 0.2)",
       padding: "1rem 2rem"
     }}>
       <div style={{
@@ -72,32 +73,66 @@ export default function Header() {
         <a href="/" style={{
           display: "flex",
           alignItems: "center",
-          gap: "0.75rem",
+          gap: "0.5rem",
           textDecoration: "none",
-          color: "#4fd1c5",
-          fontSize: "1.5rem",
-          fontWeight: "bold"
+          color: "#10b981",
+          fontSize: "1.25rem",
+          fontWeight: "600"
         }}>
-          <span style={{ fontSize: "2rem" }}>🎓</span>
-          <span>EduChain</span>
+          <Brain style={{ width: "32px", height: "32px", strokeWidth: 1.5 }} />
         </a>
 
         {/* Navigation */}
         <nav style={{
           display: "flex",
-          gap: "2rem",
-          alignItems: "center"
+          gap: "2.5rem",
+          alignItems: "center",
+          flex: 1,
+          justifyContent: "center"
         }}>
-          <a href="/" style={{ color: "#e0e0e0", textDecoration: "none", transition: "color 0.3s" }}>
+          <a href="/" style={{ 
+            color: "#10b981", 
+            textDecoration: "none", 
+            transition: "color 0.3s",
+            fontSize: "0.95rem",
+            fontWeight: "500"
+          }}>
             Home
           </a>
-          <a href="/apply-enhanced" style={{ color: "#e0e0e0", textDecoration: "none", transition: "color 0.3s" }}>
-            Apply
+          <a href="/apply-enhanced" style={{ 
+            color: "#9ca3af", 
+            textDecoration: "none", 
+            transition: "color 0.3s",
+            fontSize: "0.95rem",
+            fontWeight: "500"
+          }}>
+            Student
           </a>
-          <a href="/check-enhanced" style={{ color: "#e0e0e0", textDecoration: "none", transition: "color 0.3s" }}>
-            Check Status
+          <a href="/check-enhanced" style={{ 
+            color: "#9ca3af", 
+            textDecoration: "none", 
+            transition: "color 0.3s",
+            fontSize: "0.95rem",
+            fontWeight: "500"
+          }}>
+            Researcher
           </a>
-          <a href="/docs" style={{ color: "#e0e0e0", textDecoration: "none", transition: "color 0.3s" }}>
+          <a href="/docs" style={{ 
+            color: "#9ca3af", 
+            textDecoration: "none", 
+            transition: "color 0.3s",
+            fontSize: "0.95rem",
+            fontWeight: "500"
+          }}>
+            School
+          </a>
+          <a href="/docs" style={{ 
+            color: "#9ca3af", 
+            textDecoration: "none", 
+            transition: "color 0.3s",
+            fontSize: "0.95rem",
+            fontWeight: "500"
+          }}>
             Docs
           </a>
         </nav>
@@ -108,36 +143,37 @@ export default function Header() {
             onClick={connectWallet}
             disabled={isConnecting}
             style={{
-              padding: "0.75rem 1.5rem",
-              background: "linear-gradient(135deg, #00e6a0 0%, #00b380 100%)",
+              padding: "0.625rem 1.75rem",
+              background: "#10b981",
               color: "white",
               border: "none",
-              borderRadius: "8px",
-              fontWeight: "bold",
+              borderRadius: "6px",
+              fontWeight: "600",
               cursor: isConnecting ? "not-allowed" : "pointer",
               opacity: isConnecting ? 0.7 : 1,
               transition: "all 0.3s",
-              fontSize: "0.95rem"
+              fontSize: "0.875rem"
             }}
           >
             {isConnecting ? "Connecting..." : "Connect Wallet"}
           </button>
         ) : (
           <div style={{
-            padding: "0.75rem 1.5rem",
-            background: "rgba(79, 209, 197, 0.1)",
-            border: "1px solid #4fd1c5",
-            borderRadius: "8px",
-            color: "#4fd1c5",
-            fontWeight: "bold",
+            padding: "0.625rem 1.5rem",
+            background: "rgba(16, 185, 129, 0.1)",
+            border: "1px solid rgba(16, 185, 129, 0.3)",
+            borderRadius: "6px",
+            color: "#10b981",
+            fontWeight: "600",
             display: "flex",
             alignItems: "center",
-            gap: "0.5rem"
+            gap: "0.5rem",
+            fontSize: "0.875rem"
           }}>
             <span style={{ 
-              width: "8px", 
-              height: "8px", 
-              background: "#00e6a0", 
+              width: "6px", 
+              height: "6px", 
+              background: "#10b981", 
               borderRadius: "50%",
               display: "inline-block"
             }} />

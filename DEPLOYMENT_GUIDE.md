@@ -1,5 +1,98 @@
 # 🚀 Deployment Guide
 
+## 🌟 Quick Start: Deploy to Sepolia Testnet
+
+This guide will help you deploy your Private School Eligibility System to **Ethereum Sepolia Testnet** and host the frontend on **Vercel**.
+
+### Prerequisites
+- ✅ MetaMask wallet installed
+- ✅ GitHub account
+- ✅ Vercel account (free)
+- ✅ Alchemy or Infura account (free)
+
+---
+
+## Part 0: Deploy Smart Contract to Sepolia
+
+### Step 1: Get Sepolia Test ETH
+
+1. Visit [Sepolia Faucet](https://sepoliafaucet.com/)
+2. Enter your wallet address
+3. Request test ETH (you'll need ~0.1 ETH for deployment)
+4. Alternative faucets:
+   - https://www.alchemy.com/faucets/ethereum-sepolia
+   - https://faucet.quicknode.com/ethereum/sepolia
+
+### Step 2: Get RPC Provider API Key
+
+Choose one provider (Alchemy recommended):
+
+**Option A: Alchemy** (Recommended)
+1. Go to https://www.alchemy.com/
+2. Sign up for free account
+3. Create new app → Select "Ethereum" → "Sepolia"
+4. Copy your API key from dashboard
+
+**Option B: Infura**
+1. Go to https://infura.io/
+2. Sign up and create new project
+3. Select "Ethereum" → "Sepolia"
+4. Copy your project ID
+
+### Step 3: Configure Environment Variables
+
+In your project root, create/update `.env`:
+
+```env
+SEPOLIA_RPC_URL=https://eth-sepolia.g.alchemy.com/v2/YOUR_ALCHEMY_KEY
+PRIVATE_KEY=your_wallet_private_key_without_0x_prefix
+```
+
+**⚠️ IMPORTANT**: Never commit your `.env` file to GitHub!
+
+**To get your private key from MetaMask**:
+1. Open MetaMask
+2. Click three dots → Account details
+3. Click "Export Private Key"
+4. Enter password and copy (remove the `0x` prefix)
+
+### Step 4: Deploy Contract to Sepolia
+
+```powershell
+# From project root
+cd c:\Users\sokun\Documents\private-school-fhe
+
+# Compile contract
+npm run compile
+
+# Deploy to Sepolia
+npx hardhat run scripts/deploy.ts --network sepolia
+```
+
+**Save the deployed contract address!** You'll see output like:
+```
+PrivateSchoolEligibility deployed to: 0x1234567890abcdef...
+```
+
+### Step 5: Verify Contract on Etherscan (Optional)
+
+```powershell
+npx hardhat verify --network sepolia 0xYourContractAddress "0xYourAdminAddress"
+```
+
+### Step 6: Configure Frontend for Sepolia
+
+Navigate to frontend folder and update `.env.local`:
+
+```env
+NEXT_PUBLIC_NETWORK=sepolia
+NEXT_PUBLIC_CONTRACT_ADDRESS=0xYourDeployedContractAddress
+```
+
+That's it! Your contract is now live on Sepolia testnet. 🎉
+
+---
+
 ## Part 1: Push to GitHub
 
 ### Step 1: Create a GitHub Repository
@@ -178,20 +271,29 @@ vercel --prod
    - **Install Command**: `npm install`
 5. Click **Deploy**
 
-### Step 4: Configure Environment Variables (Important!)
+### Step 4: Configure Environment Variables on Vercel (Critical!)
 
-Since the blockchain won't run on Vercel, you have two options:
+After deploying to Vercel, add these environment variables:
 
-#### Option 1: Demo Mode (No Blockchain)
-Add these environment variables in Vercel:
-- `NEXT_PUBLIC_DEMO_MODE=true`
+1. Go to your project on Vercel Dashboard
+2. Click **Settings** → **Environment Variables**
+3. Add the following:
 
-Then update your code to show a demo message when blockchain is unavailable.
+**For Sepolia Testnet** (Recommended):
+```
+NEXT_PUBLIC_NETWORK=sepolia
+NEXT_PUBLIC_CONTRACT_ADDRESS=0xYourDeployedContractAddress
+```
 
-#### Option 2: Connect to a Test Network
-Deploy your contract to a public testnet (like Sepolia) and use those credentials:
-- `NEXT_PUBLIC_FHEVM_RPC=https://sepolia.infura.io/v3/YOUR_KEY`
-- `NEXT_PUBLIC_CONTRACT_ADDRESS=0x...`
+**Optional** (if you want to use your own RPC):
+```
+NEXT_PUBLIC_SEPOLIA_RPC=https://eth-sepolia.g.alchemy.com/v2/YOUR_KEY
+```
+
+4. Click **Save**
+5. **Redeploy** your application for changes to take effect
+
+**Important**: Users will need MetaMask connected to Sepolia testnet to interact with your app!
 
 ---
 
