@@ -59,9 +59,9 @@ export default function WalletRequired({ children }: WalletRequiredProps) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(135deg, #0a0a1e 0%, #1a1a3e 100%)"
+        background: "#000000"
       }}>
-        <div style={{ textAlign: "center", color: "#4fd1c5" }}>
+        <div style={{ textAlign: "center", color: "#10b981" }}>
           <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🔄</div>
           <div>Checking wallet connection...</div>
         </div>
@@ -76,7 +76,7 @@ export default function WalletRequired({ children }: WalletRequiredProps) {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "linear-gradient(135deg, #0a0a1e 0%, #1a1a3e 100%)",
+        background: "#000000",
         position: "relative",
         overflow: "hidden"
       }}>
@@ -92,15 +92,15 @@ export default function WalletRequired({ children }: WalletRequiredProps) {
             0deg,
             transparent,
             transparent 50px,
-            rgba(79, 209, 197, 0.3) 50px,
-            rgba(79, 209, 197, 0.3) 51px
+            rgba(16, 185, 129, 0.3) 50px,
+            rgba(16, 185, 129, 0.3) 51px
           ),
           repeating-linear-gradient(
             90deg,
             transparent,
             transparent 50px,
-            rgba(79, 209, 197, 0.3) 50px,
-            rgba(79, 209, 197, 0.3) 51px
+            rgba(16, 185, 129, 0.3) 50px,
+            rgba(16, 185, 129, 0.3) 51px
           )`
         }} />
 
@@ -116,7 +116,7 @@ export default function WalletRequired({ children }: WalletRequiredProps) {
           <div style={{
             fontSize: "6rem",
             marginBottom: "2rem",
-            background: "radial-gradient(circle, rgba(79, 209, 197, 0.3) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%)",
             width: "200px",
             height: "200px",
             margin: "0 auto 2rem",
@@ -132,7 +132,7 @@ export default function WalletRequired({ children }: WalletRequiredProps) {
           <h1 style={{
             fontSize: "3rem",
             marginBottom: "1rem",
-            background: "linear-gradient(135deg, #4fd1c5 0%, #00e6a0 100%)",
+            background: "linear-gradient(135deg, #10b981 0%, #34d399 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             fontWeight: "bold"
@@ -142,7 +142,7 @@ export default function WalletRequired({ children }: WalletRequiredProps) {
 
           <h2 style={{
             fontSize: "1.5rem",
-            color: "#00e6a0",
+            color: "#10b981",
             marginBottom: "1rem",
             fontWeight: "normal"
           }}>
@@ -150,7 +150,7 @@ export default function WalletRequired({ children }: WalletRequiredProps) {
           </h2>
 
           <p style={{
-            color: "#a0aec0",
+            color: "#9ca3af",
             fontSize: "1.1rem",
             marginBottom: "3rem",
             lineHeight: "1.6"
@@ -165,7 +165,7 @@ export default function WalletRequired({ children }: WalletRequiredProps) {
             disabled={isConnecting}
             style={{
               padding: "1.25rem 3rem",
-              background: "linear-gradient(135deg, #00e6a0 0%, #00b380 100%)",
+              background: "#10b981",
               color: "white",
               border: "none",
               borderRadius: "12px",
@@ -174,39 +174,28 @@ export default function WalletRequired({ children }: WalletRequiredProps) {
               opacity: isConnecting ? 0.7 : 1,
               transition: "all 0.3s",
               fontSize: "1.1rem",
-              boxShadow: "0 8px 32px rgba(0, 230, 160, 0.3)"
+              boxShadow: "0 8px 32px rgba(16, 185, 129, 0.3)"
             }}
           >
-            {isConnecting ? "Connecting..." : "🦊 Connect Wallet"}
+            {isConnecting ? "Connecting..." : "Connect Wallet"}
           </button>
 
           {/* Info */}
           <div style={{
             marginTop: "3rem",
             padding: "1.5rem",
-            background: "rgba(79, 209, 197, 0.05)",
-            border: "1px solid rgba(79, 209, 197, 0.2)",
+            background: "rgba(16, 185, 129, 0.05)",
+            border: "1px solid rgba(16, 185, 129, 0.2)",
             borderRadius: "12px",
             textAlign: "left"
           }}>
-            <h3 style={{ color: "#4fd1c5", marginBottom: "1rem", fontSize: "1.1rem" }}>
-              ℹ️ Before You Start
+            <h3 style={{ color: "#10b981", marginBottom: "1rem", fontSize: "1.1rem" }}>
+              Before You Start
             </h3>
-            <ul style={{ color: "#a0aec0", lineHeight: "1.8", paddingLeft: "1.5rem" }}>
+            <ul style={{ color: "#9ca3af", lineHeight: "1.8", paddingLeft: "1.5rem" }}>
               <li>Install MetaMask browser extension</li>
-              <li>Connect to <strong style={{ color: "#00e6a0" }}>Localhost 8545</strong> network</li>
-              <li>Make sure Hardhat node is running</li>
-              <li>Your data is encrypted and secure</li>
+              <li>Connect to the network</li>
             </ul>
-          </div>
-
-          {/* Footer */}
-          <div style={{
-            marginTop: "2rem",
-            color: "#666",
-            fontSize: "0.9rem"
-          }}>
-            <p>Powered by Solidity • Hardhat • Next.js • Ethers.js</p>
           </div>
         </div>
       </div>
