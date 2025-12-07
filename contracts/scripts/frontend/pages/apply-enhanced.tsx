@@ -120,12 +120,15 @@ export default function ApplyEnhancedPage() {
           input, select {
             width: 100%;
             padding: 0.875rem;
-            font-size: 1rem;
+            font-size: 16px;
             background: rgba(16, 185, 129, 0.05);
             border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 8px;
             color: #e5e7eb;
             transition: all 0.3s;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
           }
           input:focus, select:focus {
             outline: none;
@@ -135,9 +138,37 @@ export default function ApplyEnhancedPage() {
           input::placeholder {
             color: #6b7280;
           }
+          input[type="date"] {
+            position: relative;
+            color-scheme: dark;
+          }
           input[type="date"]::-webkit-calendar-picker-indicator {
             filter: invert(1);
             cursor: pointer;
+            opacity: 1;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            margin: 0;
+          }
+          input[type="date"]::-webkit-datetime-edit {
+            color: #e5e7eb;
+          }
+          input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+            padding: 0;
+          }
+          select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2310b981' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.875rem center;
+            background-size: 12px;
+            padding-right: 2.5rem;
+            cursor: pointer;
+          }
+          select option {
+            background: #1f2937;
+            color: #e5e7eb;
+            padding: 0.5rem;
           }
           label {
             color: #e5e7eb;
