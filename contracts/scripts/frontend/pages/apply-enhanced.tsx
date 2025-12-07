@@ -84,48 +84,83 @@ export default function ApplyEnhancedPage() {
   }
 
   return (
-    <main style={{ maxWidth: 900, padding: "2rem" }}>
+    <main style={{ maxWidth: 900, padding: "1.5rem", margin: "0 auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>
-          🎓 School Admission Application
+        <h1 style={{ fontSize: "clamp(1.75rem, 5vw, 2.5rem)", marginBottom: "0.5rem", color: "#10b981" }}>
+          School Admission Application
         </h1>
-        <p style={{ color: "#a0aec0", fontSize: "1.1rem" }}>
+        <p style={{ color: "#9ca3af", fontSize: "clamp(1rem, 3vw, 1.1rem)" }}>
           Complete your application with our privacy-first point-based system
         </p>
       </div>
 
       {estimatedPoints !== null && (
         <div style={{
-          background: estimatedPoints >= 70 ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)" : "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+          background: estimatedPoints >= 70 ? "rgba(16, 185, 129, 0.2)" : "rgba(239, 68, 68, 0.2)",
+          border: `2px solid ${estimatedPoints >= 70 ? "#10b981" : "#ef4444"}`,
           padding: "1.5rem",
           borderRadius: "12px",
           marginBottom: "2rem",
-          textAlign: "center",
-          color: "white"
+          textAlign: "center"
         }}>
-          <div style={{ fontSize: "0.9rem", opacity: 0.9, marginBottom: "0.5rem" }}>
+          <div style={{ fontSize: "0.9rem", color: "#9ca3af", marginBottom: "0.5rem" }}>
             Estimated Score
           </div>
-          <div style={{ fontSize: "3rem", fontWeight: "bold" }}>
+          <div style={{ fontSize: "clamp(2.5rem, 8vw, 3rem)", fontWeight: "bold", color: estimatedPoints >= 70 ? "#10b981" : "#ef4444" }}>
             {estimatedPoints}/100
           </div>
-          <div style={{ fontSize: "0.9rem", opacity: 0.9, marginTop: "0.5rem" }}>
-            {estimatedPoints >= 70 ? "✅ Likely Eligible" : "⚠️ Below Passing Score (70)"}
+          <div style={{ fontSize: "0.9rem", color: estimatedPoints >= 70 ? "#10b981" : "#ef4444", marginTop: "0.5rem" }}>
+            {estimatedPoints >= 70 ? "✓ Likely Eligible" : "⚠ Below Passing Score (70)"}
           </div>
         </div>
       )}
 
       <form onSubmit={handleSubmit} onChange={handleFormChange}>
+        <style>{`
+          input, select {
+            width: 100%;
+            padding: 0.875rem;
+            font-size: 1rem;
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 8px;
+            color: #e5e7eb;
+            transition: all 0.3s;
+          }
+          input:focus, select:focus {
+            outline: none;
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.1);
+          }
+          input::placeholder {
+            color: #6b7280;
+          }
+          input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+          }
+          label {
+            color: #e5e7eb;
+            font-weight: 500;
+            font-size: 0.95rem;
+          }
+          .card {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+          }
+        `}</style>
         <div style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 300px), 1fr))",
           gap: "1.5rem",
           marginBottom: "2rem"
         }}>
           {/* Personal Information Section */}
           <div className="card" style={{ gridColumn: "1 / -1" }}>
-            <h3 style={{ marginBottom: "1rem", color: "#4fd1c5" }}>
-              📋 Personal Information
+            <h3 style={{ marginBottom: "1rem", color: "#10b981", fontSize: "1.25rem" }}>
+              Personal Information
             </h3>
             
             <label style={{ display: "block", marginBottom: "1rem" }}>
@@ -152,7 +187,7 @@ export default function ApplyEnhancedPage() {
               />
             </label>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 200px), 1fr))", gap: "1rem" }}>
               <label>
                 Date of Birth *
                 <input
@@ -180,13 +215,13 @@ export default function ApplyEnhancedPage() {
 
           {/* Academic Performance */}
           <div className="card">
-            <h3 style={{ marginBottom: "1rem", color: "#4fd1c5" }}>
-              📚 Academic Performance
+            <h3 style={{ marginBottom: "1rem", color: "#10b981", fontSize: "1.25rem" }}>
+              Academic Performance
             </h3>
             
             <label style={{ display: "block", marginBottom: "1rem" }}>
               Entrance Exam Score (0-100) *
-              <div style={{ fontSize: "0.85rem", color: "#a0aec0", marginTop: "0.25rem" }}>
+              <div style={{ fontSize: "0.85rem", color: "#9ca3af", marginTop: "0.25rem" }}>
                 90+: 40pts | 80-89: 30pts | 70-79: 20pts | 60-69: 10pts
               </div>
               <input
@@ -203,7 +238,7 @@ export default function ApplyEnhancedPage() {
 
             <label style={{ display: "block" }}>
               Extracurricular Score (0-10) *
-              <div style={{ fontSize: "0.85rem", color: "#a0aec0", marginTop: "0.25rem" }}>
+              <div style={{ fontSize: "0.85rem", color: "#9ca3af", marginTop: "0.25rem" }}>
                 Sports, arts, clubs, volunteer work
               </div>
               <input
@@ -221,13 +256,13 @@ export default function ApplyEnhancedPage() {
 
           {/* Financial & Interview */}
           <div className="card">
-            <h3 style={{ marginBottom: "1rem", color: "#4fd1c5" }}>
-              💰 Financial & Interview
+            <h3 style={{ marginBottom: "1rem", color: "#10b981", fontSize: "1.25rem" }}>
+              Financial & Interview
             </h3>
             
             <label style={{ display: "block", marginBottom: "1rem" }}>
               Income Bracket (1-5) *
-              <div style={{ fontSize: "0.85rem", color: "#a0aec0", marginTop: "0.25rem" }}>
+              <div style={{ fontSize: "0.85rem", color: "#9ca3af", marginTop: "0.25rem" }}>
                 1: 20pts | 2: 15pts | 3: 10pts | 4-5: 5pts
               </div>
               <select
@@ -247,7 +282,7 @@ export default function ApplyEnhancedPage() {
 
             <label style={{ display: "block" }}>
               Interview Score (0-10) *
-              <div style={{ fontSize: "0.85rem", color: "#a0aec0", marginTop: "0.25rem" }}>
+              <div style={{ fontSize: "0.85rem", color: "#9ca3af", marginTop: "0.25rem" }}>
                 Communication, motivation, fit
               </div>
               <input
@@ -265,34 +300,34 @@ export default function ApplyEnhancedPage() {
         </div>
 
         {/* Point Breakdown */}
-        <div className="card" style={{ marginBottom: "2rem", background: "rgba(79, 209, 197, 0.1)" }}>
-          <h3 style={{ marginBottom: "1rem", color: "#4fd1c5" }}>
-            📊 Point System Breakdown
+        <div className="card" style={{ marginBottom: "2rem", background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)" }}>
+          <h3 style={{ marginBottom: "1rem", color: "#10b981", fontSize: "1.25rem" }}>
+            Point System Breakdown
           </h3>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 150px), 1fr))", gap: "1rem" }}>
             <div>
-              <div style={{ fontSize: "0.85rem", color: "#a0aec0" }}>Age (10-18: 20pts | 19-30: 15pts | 31-50: 10pts)</div>
-              <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>Up to 20 points</div>
+              <div style={{ fontSize: "0.85rem", color: "#9ca3af" }}>Age (10-18: 20pts | 19-30: 15pts | 31-50: 10pts)</div>
+              <div style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#10b981" }}>Up to 20 points</div>
             </div>
             <div>
-              <div style={{ fontSize: "0.85rem", color: "#a0aec0" }}>Exam Score</div>
-              <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>40 points</div>
+              <div style={{ fontSize: "0.85rem", color: "#9ca3af" }}>Exam Score</div>
+              <div style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#10b981" }}>40 points</div>
             </div>
             <div>
-              <div style={{ fontSize: "0.85rem", color: "#a0aec0" }}>Income Bracket</div>
-              <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>20 points</div>
+              <div style={{ fontSize: "0.85rem", color: "#9ca3af" }}>Income Bracket</div>
+              <div style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#10b981" }}>20 points</div>
             </div>
             <div>
-              <div style={{ fontSize: "0.85rem", color: "#a0aec0" }}>Extracurricular</div>
-              <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>10 points</div>
+              <div style={{ fontSize: "0.85rem", color: "#9ca3af" }}>Extracurricular</div>
+              <div style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#10b981" }}>10 points</div>
             </div>
             <div>
-              <div style={{ fontSize: "0.85rem", color: "#a0aec0" }}>Interview</div>
-              <div style={{ fontSize: "1.5rem", fontWeight: "bold" }}>10 points</div>
+              <div style={{ fontSize: "0.85rem", color: "#9ca3af" }}>Interview</div>
+              <div style={{ fontSize: "1.25rem", fontWeight: "bold", color: "#10b981" }}>10 points</div>
             </div>
           </div>
-          <div style={{ marginTop: "1rem", padding: "1rem", background: "rgba(79, 209, 197, 0.2)", borderRadius: "8px", textAlign: "center" }}>
-            <strong>Passing Score: 70/100 points</strong>
+          <div style={{ marginTop: "1rem", padding: "1rem", background: "rgba(16, 185, 129, 0.2)", borderRadius: "8px", textAlign: "center", border: "1px solid #10b981" }}>
+            <strong style={{ color: "#10b981" }}>Passing Score: 70/100 points</strong>
           </div>
         </div>
 
@@ -304,11 +339,16 @@ export default function ApplyEnhancedPage() {
             padding: "1.25rem",
             fontSize: "1.1rem",
             fontWeight: "bold",
-            background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            opacity: (!fullName || !email || !dob) ? 0.5 : 1
+            background: "#10b981",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            opacity: (!fullName || !email || !dob) ? 0.5 : 1,
+            transition: "all 0.3s"
           }}
         >
-          🚀 Submit Application
+          Submit Application
         </button>
       </form>
 
@@ -319,8 +359,8 @@ export default function ApplyEnhancedPage() {
       )}
 
       <div style={{ marginTop: "2rem", textAlign: "center" }}>
-        <a href="/" style={{ color: "#4fd1c5", marginRight: "2rem" }}>← Back to Home</a>
-        <a href="/check-enhanced" style={{ color: "#4fd1c5" }}>Check Status →</a>
+        <a href="/" style={{ color: "#10b981", marginRight: "2rem", textDecoration: "none", fontWeight: "500" }}>← Back to Home</a>
+        <a href="/check-enhanced" style={{ color: "#10b981", textDecoration: "none", fontWeight: "500" }}>Check Status →</a>
       </div>
 
       <Footer />
