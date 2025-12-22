@@ -6,7 +6,7 @@ export default function ApplyEnhancedPage() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [dob, setDob] = useState("");
-  const [regionCode, setRegionCode] = useState("");
+  const [countryCode, setCountryCode] = useState("");
   const [incomeBracket, setIncomeBracket] = useState("");
   const [examScore, setExamScore] = useState("");
   const [extracurricular, setExtracurricular] = useState("");
@@ -66,7 +66,7 @@ export default function ApplyEnhancedPage() {
         fullName,
         email,
         age,
-        Number(regionCode),
+        Number(countryCode),
         Number(incomeBracket),
         Number(examScore),
         Number(extracurricular),
@@ -231,15 +231,35 @@ export default function ApplyEnhancedPage() {
               </label>
 
               <label>
-                Region Code *
-                <input
-                  type="number"
-                  value={regionCode}
-                  onChange={(e) => setRegionCode(e.target.value)}
-                  placeholder="e.g., 1001"
+                Country *
+                <select
+                  value={countryCode}
+                  onChange={(e) => setCountryCode(e.target.value)}
                   required
                   style={{ marginTop: "0.5rem" }}
-                />
+                >
+                  <option value="">Select country</option>
+                  <option value="1">United States</option>
+                  <option value="44">United Kingdom</option>
+                  <option value="33">France</option>
+                  <option value="49">Germany</option>
+                  <option value="81">Japan</option>
+                  <option value="86">China</option>
+                  <option value="91">India</option>
+                  <option value="234">Nigeria</option>
+                  <option value="27">South Africa</option>
+                  <option value="61">Australia</option>
+                  <option value="55">Brazil</option>
+                  <option value="52">Mexico</option>
+                  <option value="82">South Korea</option>
+                  <option value="39">Italy</option>
+                  <option value="34">Spain</option>
+                  <option value="7">Russia</option>
+                  <option value="20">Egypt</option>
+                  <option value="62">Indonesia</option>
+                  <option value="63">Philippines</option>
+                  <option value="66">Thailand</option>
+                </select>
               </label>
             </div>
           </div>
@@ -364,7 +384,7 @@ export default function ApplyEnhancedPage() {
 
         <button 
           type="submit" 
-          disabled={!fullName || !email || !dob || !regionCode || !incomeBracket || !examScore || !extracurricular || !interview}
+          disabled={!fullName || !email || !dob || !countryCode || !incomeBracket || !examScore || !extracurricular || !interview}
           style={{
             width: "100%",
             padding: "1.25rem",

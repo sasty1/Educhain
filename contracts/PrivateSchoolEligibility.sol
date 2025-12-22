@@ -36,7 +36,7 @@ contract PrivateSchoolEligibility {
         string fullName;
         string email;
         uint8 age;
-        uint8 regionCode;
+        uint8 countryCode;
         uint8 incomeBracket;
         uint16 examScore;
         uint8 extracurricularScore; // 0-10
@@ -79,7 +79,7 @@ contract PrivateSchoolEligibility {
         string memory _fullName,
         string memory _email,
         uint8 _age,
-        uint8 _regionCode,
+        uint8 _countryCode,
         uint8 _incomeBracket,
         uint16 _examScore,
         uint8 _extracurricularScore,
@@ -91,14 +91,14 @@ contract PrivateSchoolEligibility {
         require(_extracurricularScore <= 10, "Invalid extracurricular score");
         require(_interviewScore <= 10, "Invalid interview score");
         require(_incomeBracket >= 1 && _incomeBracket <= 5, "Income bracket must be 1-5");
-        require(_regionCode >= 1 && _regionCode <= 10, "Region code must be 1-10");
+        require(_countryCode >= 1 && _countryCode <= 250, "Country code must be 1-250");
         require(bytes(_fullName).length >= 3, "Name must be at least 3 characters");
         require(bytes(_email).length >= 5, "Email must be at least 5 characters");
         require(_containsAtSymbol(_email), "Email must contain @");
 
         // Create data hash to prevent duplicate submissions
         bytes32 dataHash = keccak256(abi.encodePacked(
-            _fullName, _email, _age, _regionCode, _incomeBracket, _examScore
+            _fullName, _email, _age, _countryCode, _incomeBracket, _examScore
         ));
         require(!usedDataHashes[dataHash], "This exact data has been submitted before");
 
@@ -106,7 +106,7 @@ contract PrivateSchoolEligibility {
         studentData[msg.sender].fullName = _fullName;
         studentData[msg.sender].email = _email;
         studentData[msg.sender].age = _age;
-        studentData[msg.sender].regionCode = _regionCode;
+        studentData[msg.sender].countryCode = _countryCode;
         studentData[msg.sender].incomeBracket = _incomeBracket;
         studentData[msg.sender].examScore = _examScore;
         studentData[msg.sender].extracurricularScore = _extracurricularScore;
