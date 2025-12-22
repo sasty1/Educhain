@@ -12,44 +12,6 @@ export default function ApplyEnhancedPage() {
   const [extracurricular, setExtracurricular] = useState("");
   const [interview, setInterview] = useState("");
   const [status, setStatus] = useState("");
-  const [estimatedPoints, setEstimatedPoints] = useState<number | null>(null);
-
-  // Calculate estimated points as user fills form
-  function calculateEstimatedPoints() {
-    let points = 0;
-    
-    if (dob) {
-      const age = new Date().getFullYear() - new Date(dob).getFullYear();
-      if (age >= 10 && age <= 18) points += 20;
-      else if (age >= 19 && age <= 30) points += 15;
-      else if (age >= 31 && age <= 50) points += 10;
-      else if (age >= 5 && age <= 9) points += 15;
-      else if (age >= 51 && age <= 65) points += 10;
-    }
-    
-    const score = Number(examScore);
-    if (score >= 90) points += 40;
-    else if (score >= 80) points += 30;
-    else if (score >= 70) points += 20;
-    else if (score >= 60) points += 10;
-    
-    const income = Number(incomeBracket);
-    if (income === 1) points += 20;
-    else if (income === 2) points += 15;
-    else if (income === 3) points += 10;
-    else if (income <= 5) points += 5;
-    
-    points += Number(extracurricular) || 0;
-    points += Number(interview) || 0;
-    
-    return points;
-  }
-
-  // Update estimated points whenever form changes
-  function handleFormChange() {
-    const points = calculateEstimatedPoints();
-    setEstimatedPoints(points);
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -94,28 +56,8 @@ export default function ApplyEnhancedPage() {
         </p>
       </div>
 
-      {estimatedPoints !== null && (
-        <div style={{
-          background: estimatedPoints >= 70 ? "rgba(16, 185, 129, 0.2)" : "rgba(239, 68, 68, 0.2)",
-          border: `2px solid ${estimatedPoints >= 70 ? "#10b981" : "#ef4444"}`,
-          padding: "1.5rem",
-          borderRadius: "12px",
-          marginBottom: "2rem",
-          textAlign: "center"
-        }}>
-          <div style={{ fontSize: "0.9rem", color: "#9ca3af", marginBottom: "0.5rem" }}>
-            Estimated Score
-          </div>
-          <div style={{ fontSize: "clamp(2.5rem, 8vw, 3rem)", fontWeight: "bold", color: estimatedPoints >= 70 ? "#10b981" : "#ef4444" }}>
-            {estimatedPoints}/100
-          </div>
-          <div style={{ fontSize: "0.9rem", color: estimatedPoints >= 70 ? "#10b981" : "#ef4444", marginTop: "0.5rem" }}>
-            {estimatedPoints >= 70 ? "✓ Likely Eligible" : "⚠ Below Passing Score (70)"}
-          </div>
-        </div>
-      )}
 
-      <form onSubmit={handleSubmit} onChange={handleFormChange}>
+      <form onSubmit={handleSubmit}>
         <style>{`
           input, select {
             width: 100%;
